@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>一言</title>
+  
+    <meta name="author" content="Yi Yan Zhou (沪ICP备12034897号-1)">
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic" /> -->
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet"> -->
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/gor-theme-blink/stylesheets/normalize.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/nprogress.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/font-awesome.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/gor-theme-blink/javascripts/click.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.min.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.fitvids.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.history.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/nprogress.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/scripts.js"></script>
+<link href="/assets/gor-theme-blink/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+  <body>
+  <div id="wrapper">
+      <header class="site-header">
+          <div class="container">
+              <div class="site-title-wrapper">
+                  <h1 class="site-title"><a class="js-ajax-link" href="http://zhouyiyan.cn" title="一言">一言</a></h1>
+                  <a class="button-square" href="/rss.xml"><i class="fa fa-rss"></i></a>
+          </div>
+          <ul class="site-nav">
+            
+              
+
+
+  <li><a href="/archive">Archive</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">About</a></li>
+
+
+            
+          </ul>
+      </div>
+      </header>
+ <div id="ajax-container">
+     <div id="post-index" class="container">
+        <article class="post-container post">
+    <header class="post-header">
+    <h1 class="post-title">Controller迁移</h1>
+    <p class="post-date">
+        <time >2012-10-11</time>
+    </p>
+    </header>
+    <div class="post-content clearfix">
+    <p>在迁移了部分JSP至VM（如首页、博客属性、创建文章等）之后，我开始准备改造Controller和Action映射部分的模块，以引入REST框架。Pebble是标准的MVC架构，每个页面对应一个Action模块，页面转换通过DefaultHttpController来进行，页面通过Action获得数据然后通过JSP按照模板来生成，而且支持主题。</p>
+
+<p>从MVC转到REST是有些困难的。我做的项目里，后台部分使用REST将领域模型暴露成Web服务，为前台控件提供各种数据，而应用本身的用户交互和状态变化，则完全依靠HTML＋CSS＋JS来完成，并不需要后台参与。即使是用了VM，也只是为了Dojo框架提供一些全球化参数而已。把基于MVC的Pebble完全打散，使用REST＋页面的方法是我的Vision，但在目前阶段来说，困难过大，毕竟要重新理解和设计领域对象，还要把多个页面整合成单页面应用，对于一个业余项目来说，风险太大了。于是我尝试了一些渐进的改动方法。</p>
+
+<p>首先是把DefaultHttpController用JAX－RS的资源类改写。将原本的Servlet改写成资源类还是比较简单的，逻辑基本没什么变化。但是Controller作为动作映射的模块，未免有些过于简单，也没有利用到REST的URL路由功能，所以准备拿些Action模块继续尝试。</p>
+
+<p>REST＋VM的组合我是使用过的。在曾经一个Wiki项目里，我写过一个资源类，根据给定的路径载入相应的页面，动态的转换后，加载Wiki页面框架后返回。Pebble的设计有些类似，每个Action会根据博客的实际属性，声称一个视图，每个视图（原来是JSP，现在是VM）根据Action给的数据，填充并返回最终HTML页面。所以我也就仿照这个做法，创建了一个Blog的资源类：
+<pre>@Path(&ldquo;/blog&rdquo;)
+public class Blog {
+  @GET
+  @Path(&ldquo;/pages/{pageName}&rdquo;)
+  public View page(@PathParam(&ldquo;pageName&rdquo;) String pageName) {
+    &hellip;
+  }</p>
+
+<p>@GET
+  @Path(&ldquo;/entries/page/{page}&rdquo;)
+  public View entriesByPage(@PathParam(&ldquo;page&rdquo;) int page) {
+    &hellip;
+  }</p>
+
+<p>&hellip;
+}</pre>
+因为是渐进的改动，所以每个方法基本上都返回了Pebble原来自己的视图对象。当然我也提供了相应的ViewWriter（实现MessageBodyWriter接口）来渲染这些视图。</p>
+
+<p>至此就完成了Controller和Action模块的改动设计，接下来就是体力活了。不过困难也是有的，还需要将认证和Pebble的安全令牌机制通过Servlet过滤器来实现，同时MultiBlog的概念也要相应保留。不管怎么说，距离我自己的博客系统又进了一步。</p>
+
+
+    </div>
+    <footer class="post-footer clearfix">
+            <!-- <p class="post-tags"><span>Tagged:</span> </p> -->
+            <div class="share">
+                   <a class="icon-twitter" href="http://twitter.com/share?text=Controller迁移&url=http://zhouyiyan.cn/技术/Controller%E8%BF%81%E7%A7%BB/"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://zhouyiyan.cn/技术/Controller%E8%BF%81%E7%A7%BB/"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http://zhouyiyan.cn/技术/Controller%E8%BF%81%E7%A7%BB/"
+               onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+               <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+            </div>
+        </footer>
+    
+<div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'zhouyiyan'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<!-- <div class="pagination"> -->
+<!--            -->
+<!--             <a href="/生活/%E5%81%9C%E8%BD%A6/" title="停车"></a> -->
+<!--            -->
+<!--            -->
+
+<!--            -->
+<!--             <a href="/生活/%E9%95%BF%E5%9F%8E%E5%AE%BD%E5%B8%A6%E5%92%8C%E6%9A%97%E9%BB%913/" title="长城宽带和暗黑3">Next &rarr;</a> -->
+<!--            -->
+<!--            -->
+<!--     </div> -->
+
+</article>
+
+
+     </div>
+    </div>
+
+  </div>
+
+   
+ <footer class="footer">
+        <div class="container">
+            <div class="site-title-wrapper">
+                <h1 class="site-title"><a class="js-ajax-link" title="一言" href="http://zhouyiyan.cn">一言</a></h1>
+
+                <a class="button-square button-jump-top js-jump-top" href="#"><i class="fa fa-angle-up"></i></a>
+            </div>
+
+            <p class="footer-copyright">&copy; Yi Yan Zhou (沪ICP备12034897号-1)  / Published with <a href="http://github.com/wendal/gor">Gor</a> / <a href="https://github.com/zerob13/gor-theme-blink">gor-theme-blink </a></p>
+        </div>
+    </footer>
+
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-897555-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>HTTP服务器内嵌HTML模板引擎</title>
+  
+    <meta name="author" content="Yi Yan Zhou (沪ICP备12034897号-1)">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">一言</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">Archive</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">Tags</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">Categories</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">Pages</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>HTTP服务器内嵌HTML模板引擎 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>最近在读Martin Folwer的<a href="http://www.amazon.cn/dp/B00DYG5UTI">企业应用架构</a>。这是一本2004年的书，现在看来很多观点都已经成为流行的框架了。虽然我并没有在开发企业级应用，但还是被这本书深深吸引。在讨论分布式对象的时候，Martin表示并不看好分布式对象，因为在大多数情况下，分布式部署对象的效率，总是比在单个节点部署所有对象然后配合集群的情况要差。这让我重新考虑了目前正在进行的前端应用和后台服务分开部署的尝试。</p>
+
+<p>在传统Java的Web应用中，前端页面和后台逻辑被统一包装在一个WAR形式的压缩包中，然后通过应用服务器统一部署。从应用性能的角度考虑，也可以采用动静分离，也就是把相应前端HTML页面、JS脚本和CSS样式文件单独部署在CDN或者支持高速读取的HTTP服务器上，然后单独部署后台服务，配合缓存服务器进行截获式、或者嵌入式缓存支持，以提高性能。</p>
+
+<p>比如说我就很喜欢<a href="http://elasticsearch.org/">ElasticSearch</a>的监测模块，设计的很好，可以通过各种外部扩展来图形化ES集群的运行状态，如<a href="http://elastichq.org/">ElasticHQ</a>就只是由HTML、JS和CSS组成的前端页面，然后通过访问后端监测服务来读取数据。这种<a href="http://nobackend.org/">noBackend</a>风格的设计正是我追求的一个目标，通过分离Web应用和后台服务，提高系统的扩展性。但实际上存在两个困难：一是服务器端必须实现<a href="http://www.w3.org/TR/cors">CORS</a>跨域资源共享协议，二是可用于扩展的Web应用必须足够简单。在实际的项目中，第二个困难很难克服，因为页面需要注入URL和参数，而且本身还使用了HTML模板，无法通过JS完成所有的工作。一种方案是在HTTP服务器中安装脚本模块，通过脚本实现简单的HTML模板，比如说<a href="http://wiki.nginx.org/HttpLuaModule">安装了Lua模块的Nginx</a>。</p>
+
+<p>把HTTP前端应用和后台服务分离本身是符合分层架构的要求的，但是如果前端植入了脚本，是否属于Martin所描述的分布式对象的范畴呢？前提是植入的脚本不能涉及后台服务，那么所有的服务还是统一由客户端运行的前端页面发出，那么至少在后端并不存在分布式对象的情况。但如果植入的脚本依赖后台的某个服务，那么单次页面调用势必造成两次远程调用，倒不如还是在后端来实现脚本需要的功能会比较好。</p>
+
+<p>因为我需要的只是一个HTML模板和少量的配置读取，使用Lua脚本应该绰绰有余了。</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+          
+            <li class="prev disabled"><a>&larr; Previous</a></li>
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/生活/%E7%89%B9%E5%A4%A7%E4%BA%A4%E9%80%9A%E6%8B%A5%E5%A0%B5/" title="特大交通拥堵">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+    
+<div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'zhouyiyan'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2013-10-01</span></div>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E6%8A%80%E6%9C%AF-ref">技术 <span>45</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; Yi Yan Zhou (沪ICP备12034897号-1) 2013 
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-897555-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </body>
+</html>

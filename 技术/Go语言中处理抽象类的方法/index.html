@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>一言</title>
+  
+    <meta name="author" content="Yi Yan Zhou (沪ICP备12034897号-1)">
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic" /> -->
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet"> -->
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/gor-theme-blink/stylesheets/normalize.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/nprogress.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/font-awesome.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/gor-theme-blink/javascripts/click.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.min.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.fitvids.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.history.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/nprogress.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/scripts.js"></script>
+<link href="/assets/gor-theme-blink/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+  <body>
+  <div id="wrapper">
+      <header class="site-header">
+          <div class="container">
+              <div class="site-title-wrapper">
+                  <h1 class="site-title"><a class="js-ajax-link" href="http://zhouyiyan.cn" title="一言">一言</a></h1>
+                  <a class="button-square" href="/rss.xml"><i class="fa fa-rss"></i></a>
+          </div>
+          <ul class="site-nav">
+            
+              
+
+
+  <li><a href="/archive">Archive</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">About</a></li>
+
+
+            
+          </ul>
+      </div>
+      </header>
+ <div id="ajax-container">
+     <div id="post-index" class="container">
+        <article class="post-container post">
+    <header class="post-header">
+    <h1 class="post-title">Go语言中处理抽象类的方法</h1>
+    <p class="post-date">
+        <time >2013-06-09</time>
+    </p>
+    </header>
+    <div class="post-content clearfix">
+    <p>在移植Java中的抽象类到Go的过程中遇到这样一个问题。原先的Java代码中，有一个继承自某个接口A的抽象类C，它包含自己的字段，也声明了一些保护方法供后代重载使用，同时还声明了一些公开方法，但并没有实现任何上级接口的方法。这个抽象类可以理解成为对上级接口的扩展，和读写接口有些类似。</p>
+
+<p>Go语言中并没有对应的抽象类概念，但有两种可能的方法。
+<ol>
+    <li>使用嵌套接口。把该抽象类分解成一个新的接口B，以及一个抽象结构。抽象结构实现接口B的方法，但由于接口B嵌套了接口A，所以从理论上该抽象结构并不算是一个接口B的实现。子类则通过嵌套这个抽象结构的方式，获得其声明的保护方法，同时通过实现接口A的方法，以及用代理将接口B的方法重定向到该抽象结构中去。这样子类就同时可以看作是接口A和接口B的实现。</li>
+    <li>直接嵌套抽象结构。Go语言中函数成了一等公民，可以通过声明一个新的结构，并把函数指针一起声明出来。如果给出实现的，则通过一个私有的方法将抽象结构附带的函数实现给出来。同时，还必须让该结构实现接口A的所有方法，当然实现可以是简单的panic提示。由于这个抽象结构不是接口，所以子类必须嵌套这个抽象结构。</li>
+</ol>
+最终的实现我选择了方案1。因为代码实现上更加清晰，避免了很多函数赋值，而且嵌套结构中的方法如果调用了子类继承的方法时，需要额外通过指针保证调用的正确性。换句话说，原先Java中很自然的多态性，都需要通过代码来一一指定，很麻烦，而且debug起来也很困难。</p>
+
+
+    </div>
+    <footer class="post-footer clearfix">
+            <!-- <p class="post-tags"><span>Tagged:</span> </p> -->
+            <div class="share">
+                   <a class="icon-twitter" href="http://twitter.com/share?text=Go语言中处理抽象类的方法&url=http://zhouyiyan.cn/技术/Go%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%A4%84%E7%90%86%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95/"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://zhouyiyan.cn/技术/Go%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%A4%84%E7%90%86%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95/"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http://zhouyiyan.cn/技术/Go%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%A4%84%E7%90%86%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95/"
+               onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+               <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+            </div>
+        </footer>
+    
+<div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'zhouyiyan'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<!-- <div class="pagination"> -->
+<!--            -->
+<!--             <a href="/生活/%E5%AE%89%E5%85%A8%E5%BA%A7%E6%A4%85%E5%AE%89%E8%A3%85%E5%AE%8C%E6%AF%95/" title="安全座椅安装完毕"></a> -->
+<!--            -->
+<!--            -->
+
+<!--            -->
+<!--             <a href="/电影/%E4%B8%AD%E4%BA%8C%E7%97%85/" title="中二病">Next &rarr;</a> -->
+<!--            -->
+<!--            -->
+<!--     </div> -->
+
+</article>
+
+
+     </div>
+    </div>
+
+  </div>
+
+   
+ <footer class="footer">
+        <div class="container">
+            <div class="site-title-wrapper">
+                <h1 class="site-title"><a class="js-ajax-link" title="一言" href="http://zhouyiyan.cn">一言</a></h1>
+
+                <a class="button-square button-jump-top js-jump-top" href="#"><i class="fa fa-angle-up"></i></a>
+            </div>
+
+            <p class="footer-copyright">&copy; Yi Yan Zhou (沪ICP备12034897号-1)  / Published with <a href="http://github.com/wendal/gor">Gor</a> / <a href="https://github.com/zerob13/gor-theme-blink">gor-theme-blink </a></p>
+        </div>
+    </footer>
+
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-897555-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </body>
+</html>

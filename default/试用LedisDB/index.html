@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>一言</title>
+  
+    <meta name="author" content="Yi Yan Zhou (沪ICP备12034897号-1)">
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic" /> -->
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet"> -->
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/gor-theme-blink/stylesheets/normalize.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/nprogress.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/font-awesome.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/gor-theme-blink/javascripts/click.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.min.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.fitvids.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.history.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/nprogress.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/scripts.js"></script>
+<link href="/assets/gor-theme-blink/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+  <body>
+  <div id="wrapper">
+      <header class="site-header">
+          <div class="container">
+              <div class="site-title-wrapper">
+                  <h1 class="site-title"><a class="js-ajax-link" href="http://zhouyiyan.cn" title="一言">一言</a></h1>
+                  <a class="button-square" href="/rss.xml"><i class="fa fa-rss"></i></a>
+          </div>
+          <ul class="site-nav">
+            
+              
+
+
+  <li><a href="/archive">Archive</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">About</a></li>
+
+
+            
+          </ul>
+      </div>
+      </header>
+ <div id="ajax-container">
+     <div id="post-index" class="container">
+        <article class="post-container post">
+    <header class="post-header">
+    <h1 class="post-title">试用LedisDB</h1>
+    <p class="post-date">
+        <time >2014-08-15</time>
+    </p>
+    </header>
+    <div class="post-content clearfix">
+    <p>最初是从InfoQ上得知<a href="http://ledisdb.com">LedisDB</a>这个项目的，号称<a href="http://www.infoq.com/cn/news/2014/08/cloud-structure-thinking">“Go编写的高性能NoSQL数据库”</a>，其实最吸引我的还是其能够嵌入在Go应用中使用。LedisDB有一套自己的构建方法，不过因为我不需要它独立运行，所以走了一条捷径。整个过程并不是一帆风顺，不过也没遇到很大的困难。</p>
+
+<p>要在Go写的应用中使用LedisDB，首先要下载它的源代码和依赖项目的代码：</p>
+
+<pre><code>go get github.com/ledisdb
+go get github.com/siddontang/go-log/log
+go get github.com/siddontang/go-snappy/snappy
+go get github.com/siddontang/goleveldb/leveldb
+go get github.com/szferi/gomdb
+</code></pre>
+
+<p>如果是Windows系统的话，需要安装<a href="http://sourceforge.net/projects/mingw-w64/">MinGW-w64</a>来构建最后的LMDB。不过即使编译通过也是不能运行的，会遇到</p>
+
+<pre><code>undefined: strdup
+</code></pre>
+
+<p>经过Google发现strdup是个非标准函数，可以找到标准实现。我后来问了LedisDB的作者，发现LMDB在Windows上也是不能用的，所以就没有深入下去尝试。同时，我发现LedisDB的对于后台数据引擎的管理，是采用集中式的方法，也就是在store的包里面统一注册，没有办法单独跳过。LedisDB自带的构建脚本能够根据所在的操作系统，自动跳过某些源代码，所以没有这个问题。因为我是直接嵌入使用，没有经过一个构建过程，所以只能手动删除相应的mdb.go文件即可。</p>
+
+<p>除此之外，如果把mdb注册的方法移到mdb这个具体的包里面也是可以，不过这可能并不符合LedisDB原先的设计和现有的构建脚本。</p>
+
+<p>我主要使用LedisDB作为一个可持久化的缓存，因为Bluemix每个实例的硬盘和内存大小是1G，而且实例自动迁移的时候可能会造成硬盘数据丢失，所以LedisDB用在这里不会显得浪费，数据丢失的成本也不太大，今后可以加上主动式数据更新以及双实例热备，那基本就满足要求了。</p>
+
+<p>要初始化一个简单的LedisDB对象还蛮简单的：</p>
+
+<pre><code>var cache *ledis.DB
+var err error
+if cache, err = func() (*ledis.DB, error) {
+    cfg := config.NewConfigDefault()
+    l, err := ledis.Open(cfg)
+    if err != nil {
+        return nil, err
+    }
+    return l.Select(0)
+}(); err != nil {
+    log.Fatal(err)
+}
+</code></pre>
+
+<p>我目前基本上只会用到Get和Set方法，将来可能会用到expire之类的，控制内存的使用。</p>
+
+<pre><code>var data []byte
+if data, err = cache.Get([]byte(file)); err != nil {
+    log.Printf(&quot;Error reading cache: %v&quot;, err)
+}
+if len(data) == 0 {
+    // ... obtain data from remote service
+
+    if err = cache.Set([]byte(file), data); err != nil {
+        log.Printf(&quot;Error writing cache: %v&quot;, err)
+    }
+}
+</code></pre>
+
+<p>我已经在这里使用了LedisDB，内存占用很小，很符合Go应用小而易用的特点，Good！</p>
+
+
+    </div>
+    <footer class="post-footer clearfix">
+            <!-- <p class="post-tags"><span>Tagged:</span> </p> -->
+            <div class="share">
+                   <a class="icon-twitter" href="http://twitter.com/share?text=试用LedisDB&url=http://zhouyiyan.cn/default/%E8%AF%95%E7%94%A8LedisDB/"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://zhouyiyan.cn/default/%E8%AF%95%E7%94%A8LedisDB/"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http://zhouyiyan.cn/default/%E8%AF%95%E7%94%A8LedisDB/"
+               onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+               <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+            </div>
+        </footer>
+    
+<div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'zhouyiyan'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<!-- <div class="pagination"> -->
+<!--            -->
+<!--            -->
+<!--             <1!-- <a>&larr; Previous</a></li> --1> -->
+<!--            -->
+
+<!--            -->
+<!--             <a href="/default/%E6%88%91%E7%9A%84%E4%B8%80%E5%A4%A9/" title="我的一天">Next &rarr;</a> -->
+<!--            -->
+<!--            -->
+<!--     </div> -->
+
+</article>
+
+
+     </div>
+    </div>
+
+  </div>
+
+   
+ <footer class="footer">
+        <div class="container">
+            <div class="site-title-wrapper">
+                <h1 class="site-title"><a class="js-ajax-link" title="一言" href="http://zhouyiyan.cn">一言</a></h1>
+
+                <a class="button-square button-jump-top js-jump-top" href="#"><i class="fa fa-angle-up"></i></a>
+            </div>
+
+            <p class="footer-copyright">&copy; Yi Yan Zhou (沪ICP备12034897号-1)  / Published with <a href="http://github.com/wendal/gor">Gor</a> / <a href="https://github.com/zerob13/gor-theme-blink">gor-theme-blink </a></p>
+        </div>
+    </footer>
+
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-897555-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </body>
+</html>

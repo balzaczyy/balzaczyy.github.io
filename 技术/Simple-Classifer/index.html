@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>一言</title>
+  
+    <meta name="author" content="Yi Yan Zhou (沪ICP备12034897号-1)">
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic" /> -->
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet"> -->
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/gor-theme-blink/stylesheets/normalize.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/nprogress.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/font-awesome.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/gor-theme-blink/javascripts/click.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.min.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.fitvids.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.history.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/nprogress.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/scripts.js"></script>
+<link href="/assets/gor-theme-blink/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+  <body>
+  <div id="wrapper">
+      <header class="site-header">
+          <div class="container">
+              <div class="site-title-wrapper">
+                  <h1 class="site-title"><a class="js-ajax-link" href="http://zhouyiyan.cn" title="一言">一言</a></h1>
+                  <a class="button-square" href="/rss.xml"><i class="fa fa-rss"></i></a>
+          </div>
+          <ul class="site-nav">
+            
+              
+
+
+  <li><a href="/archive">Archive</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">About</a></li>
+
+
+            
+          </ul>
+      </div>
+      </header>
+ <div id="ajax-container">
+     <div id="post-index" class="container">
+        <article class="post-container post">
+    <header class="post-header">
+    <h1 class="post-title">Simple Classifer</h1>
+    <p class="post-date">
+        <time >2006-12-16</time>
+    </p>
+    </header>
+    <div class="post-content clearfix">
+    <p>这两天在修改论文，导师说要多加一些深度和创新点，可以补充一些模糊推理、神经网络之类的东东。虽然本科学习过一些数据挖掘的算法，而且数据挖掘也是一种机器学习，但绝不是AI之类的范畴，因此说起模糊推理和神经网络，也会比较感冒。曾经想要好好学习一个<a href="http://beta.blogger.com/classifier4j.sourceforge.net">Java下的分类器</a>，但是工作和论文让BC无法分心，而且目前又在开发一个帮助Support更快上手的基于Excel的报表生成器。在经过来回踱步四五次后，想到一个最简单的基于01神经网络的分类器改进，丰满论文之余贡献与此。</p>
+
+<p>前提：一个基于模型的分类器，输出为M(p)，p为离散参数。如果可以确定M(p)能够起到分类作用，但无法确定参数p，可以使用01神经网络进行二次分类学习。以下全部变量均属于[0,1]。</p>
+
+<p>设新的分类器C输出[0,1]，结构如下：
+0&mdash;&mdash;-&gt;J0&mdash;\
+M(P1)&mdash;&gt;J1&mdash;-\
+M(P2)&mdash;&gt;J2&mdash;&ndash;\
+. .&mdash;&mdash;-X&ndash;&gt;C
+. .&mdash;&mdash;/
+M(Pn-1)-&gt;Jn-1&ndash;/
+1&mdash;&mdash;-&gt;Jn&mdash;/
+其中Pi为p的可选参数，Ji为权值，且Sigma(Ji)=1.0，输出为C=Sigma(M(Pi)<em>Ji)+J0+Jn。反馈方法为：
+{Ji=Ji</em>(1+S), if M(Pi){Ji=Ji<em>(1-S), if M(Pi)&gt;C</em>
+{Keep(Sigma(Ji)=1.0)
+其中C*为训练结果输入，S为学习速度。</p>
+
+<p>将01分类器C接到模型分类器M后，就能够确定M分类器的参数p了。虽然p参数可以通过改进模型获得，但是这样能够增加模型M的复杂度，同时给论文增加篇幅，呵呵^_^，不好意思咯。</p>
+
+
+    </div>
+    <footer class="post-footer clearfix">
+            <!-- <p class="post-tags"><span>Tagged:</span> </p> -->
+            <div class="share">
+                   <a class="icon-twitter" href="http://twitter.com/share?text=Simple Classifer&url=http://zhouyiyan.cn/技术/Simple-Classifer/"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://zhouyiyan.cn/技术/Simple-Classifer/"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http://zhouyiyan.cn/技术/Simple-Classifer/"
+               onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+               <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+            </div>
+        </footer>
+    
+<div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'zhouyiyan'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<!-- <div class="pagination"> -->
+<!--            -->
+<!--             <a href="/博客/MSN-Space-is-Faster/" title="MSN Space is Faster"></a> -->
+<!--            -->
+<!--            -->
+
+<!--            -->
+<!--             <a href="/技术/Firefox-and-Eclipse/" title="Firefox and Eclipse">Next &rarr;</a> -->
+<!--            -->
+<!--            -->
+<!--     </div> -->
+
+</article>
+
+
+     </div>
+    </div>
+
+  </div>
+
+   
+ <footer class="footer">
+        <div class="container">
+            <div class="site-title-wrapper">
+                <h1 class="site-title"><a class="js-ajax-link" title="一言" href="http://zhouyiyan.cn">一言</a></h1>
+
+                <a class="button-square button-jump-top js-jump-top" href="#"><i class="fa fa-angle-up"></i></a>
+            </div>
+
+            <p class="footer-copyright">&copy; Yi Yan Zhou (沪ICP备12034897号-1)  / Published with <a href="http://github.com/wendal/gor">Gor</a> / <a href="https://github.com/zerob13/gor-theme-blink">gor-theme-blink </a></p>
+        </div>
+    </footer>
+
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-897555-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </body>
+</html>

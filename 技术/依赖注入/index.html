@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>一言</title>
+  
+    <meta name="author" content="Yi Yan Zhou (沪ICP备12034897号-1)">
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic" /> -->
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet"> -->
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/gor-theme-blink/stylesheets/normalize.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/nprogress.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/gor-theme-blink/stylesheets/font-awesome.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/gor-theme-blink/javascripts/click.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.min.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.fitvids.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/jquery.history.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/nprogress.js"></script>
+<script src="/assets/gor-theme-blink/javascripts/scripts.js"></script>
+<link href="/assets/gor-theme-blink/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+  <body>
+  <div id="wrapper">
+      <header class="site-header">
+          <div class="container">
+              <div class="site-title-wrapper">
+                  <h1 class="site-title"><a class="js-ajax-link" href="http://zhouyiyan.cn" title="一言">一言</a></h1>
+                  <a class="button-square" href="/rss.xml"><i class="fa fa-rss"></i></a>
+          </div>
+          <ul class="site-nav">
+            
+              
+
+
+  <li><a href="/archive">Archive</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">About</a></li>
+
+
+            
+          </ul>
+      </div>
+      </header>
+ <div id="ajax-container">
+     <div id="post-index" class="container">
+        <article class="post-container post">
+    <header class="post-header">
+    <h1 class="post-title">依赖注入</h1>
+    <p class="post-date">
+        <time >2012-09-11</time>
+    </p>
+    </header>
+    <div class="post-content clearfix">
+    <p>在移除Pebble的Spring安全模块之余，我不禁感叹起依赖注入来。我是在2009年接触到依赖注入的，当时主要是看了Spring的创始人Rod的一些文章，又结合了Google推出的Guice，深深为之所动。当时感觉这个依赖注入实在是太强大了，只要给定接口，相应的管理器就能根据具体配置返回实例，很方便。于是我开发了自己针对javax.inject的实现，并在项目里用了一段时间，可是效果却不好。总结下来，有以下的问题：
+<ul>
+    <li>针对接口的具体实现常常只有一个，直接使用Java创建对象的方式更容易；</li>
+    <li>调试异常困难，特别是对参数sniff的逻辑和实例生命周期的管理，非常麻烦；</li>
+    <li>延迟加载的成员，往往需要显示的以来DI框架对象，造成更多的以来问题；</li>
+    <li>类和类之间的以来关系很乱，往往不知道先后顺序。</li>
+</ul>
+当然以上这些问题都可以通过一定的方法解决，但是维护的代价大过它本身解决的问题。移除依赖注入逻辑的过程也异常痛苦，感觉整个底层被重写了一般。好的框架在使用的时候应该毫无感觉，甚至能和应用本身融为一体。就目前而言，我用过的唯一符合这个标准的就剩下JAX-RS了，是我目前开发必用库之一。</p>
+
+
+    </div>
+    <footer class="post-footer clearfix">
+            <!-- <p class="post-tags"><span>Tagged:</span> </p> -->
+            <div class="share">
+                   <a class="icon-twitter" href="http://twitter.com/share?text=依赖注入&url=http://zhouyiyan.cn/技术/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://zhouyiyan.cn/技术/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http://zhouyiyan.cn/技术/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/"
+               onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+               <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+            </div>
+        </footer>
+    
+<div id="disqus_thread"></div>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'zhouyiyan'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<!-- <div class="pagination"> -->
+<!--            -->
+<!--             <a href="/技术/Pebble%E5%85%8B%E9%9A%86%E6%97%A5%E5%BF%97/" title="Pebble克隆日志"></a> -->
+<!--            -->
+<!--            -->
+
+<!--            -->
+<!--             <a href="/技术/%E7%A0%94%E7%A9%B6Pebble/" title="研究Pebble">Next &rarr;</a> -->
+<!--            -->
+<!--            -->
+<!--     </div> -->
+
+</article>
+
+
+     </div>
+    </div>
+
+  </div>
+
+   
+ <footer class="footer">
+        <div class="container">
+            <div class="site-title-wrapper">
+                <h1 class="site-title"><a class="js-ajax-link" title="一言" href="http://zhouyiyan.cn">一言</a></h1>
+
+                <a class="button-square button-jump-top js-jump-top" href="#"><i class="fa fa-angle-up"></i></a>
+            </div>
+
+            <p class="footer-copyright">&copy; Yi Yan Zhou (沪ICP备12034897号-1)  / Published with <a href="http://github.com/wendal/gor">Gor</a> / <a href="https://github.com/zerob13/gor-theme-blink">gor-theme-blink </a></p>
+        </div>
+    </footer>
+
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-897555-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </body>
+</html>
