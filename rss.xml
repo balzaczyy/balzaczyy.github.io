@@ -2,7 +2,13 @@
 <rss version="2.0">  <channel>
     <title>一言</title>
     <link>http://zhouyiyan.cn</link>
-    <pubDate>16 Aug 14 15:25 +0800</pubDate>
+    <pubDate>17 Aug 14 19:11 +0800</pubDate>
+    <item>
+      <title>用CSS制作简单的logo水印</title>
+      <link>http://zhouyiyan.cn/default/%E7%94%A8CSS%E5%88%B6%E4%BD%9C%E7%AE%80%E5%8D%95%E7%9A%84logo%E6%B0%B4%E5%8D%B0/</link>
+      <pubDate>2014-08-17 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;最近部门要办一个Bluemix和CloudFoundry的推广月活动，我应邀在第一周做一个讲座介绍Bluemix和CF命令行的使用。为了让讲座更炫一些，我照例又试用了一个新的slide工具&lt;a href=&#34;http://imakewebthings.com/deck.js/&#34;&gt;deck.js&lt;/a&gt;。具体的ppt等我做完讲座再放出，这里要分享的是一个logo水印的制作方法。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;在公司内部做讲座，常用到的ppt首页一般都有一个大大的公司logo（用来填补首页的空白……）。为了体现我们的团队，我特地把logo换成了我们的团队名称。为了制作这个logo水印，我尝试了office的艺术字和Paint.NET(PS不懂），效果都不太好。想起来自己也算是个前台开发人员（囧），就试着用CSS做了一个，期间遇到无数的问题，一一用谷歌解决。代码如下：&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;.watermark {&#xA;  font-size: 15em;&#xA;  -webkit-transform: rotate(-30deg);&#xA;  position: absolute;&#xA;  right: 0;&#xA;  bottom: 0;&#xA;  opacity: 0.4;&#xA;  margin-right: -5%;    &#xA;  margin-bottom: -5%;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;什么，你没看到这里的水印？请务必留言给我。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;div class=&#34;watermark&#34;&gt;ACE&lt;/dev&gt;&lt;/p&gt;&#xA;</description>
+    </item>
     <item>
       <title>试用LedisDB</title>
       <link>http://zhouyiyan.cn/default/%E8%AF%95%E7%94%A8LedisDB/</link>
