@@ -23,6 +23,7 @@
 <link href="/assets/gor-theme-blink/stylesheets/nprogress.css" type="text/css" rel="stylesheet" media="all">
 <link href="/assets/gor-theme-blink/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
 <link href="/assets/gor-theme-blink/stylesheets/font-awesome.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/gor-theme-blink/javascripts/click.js"></script>
 <script src="/assets/gor-theme-blink/javascripts/jquery.min.js"></script>
 <script src="/assets/gor-theme-blink/javascripts/jquery.fitvids.js"></script>
 <script src="/assets/gor-theme-blink/javascripts/jquery.history.js"></script>
@@ -87,10 +88,10 @@
 <p>第四个错是死循环，而且还挺典型的。在Java里面有段代码</p>
 
 <pre><code>main:
-while (off &lt;= limit) {
+while (off &amp;lt;= limit) {
     // ...
     while (true) {
-        if (off &gt;= matchLimit) {
+        if (off &amp;gt;= matchLimit) {
             break main;
         // do something
     }
@@ -100,10 +101,10 @@ while (off &lt;= limit) {
 
 <p>在Go里面我写成了</p>
 
-<pre><code>for offset &lt;= limit {
+<pre><code>for offset &amp;lt;= limit {
     // ...
     var hasMore bool
-    for hasMore = offset &lt; matchLimit; hasMore; offset++ {
+    for hasMore = offset &amp;lt; matchLimit; hasMore; offset++ {
         // do something forever now
     }
     if !hasMore {
@@ -115,13 +116,13 @@ while (off &lt;= limit) {
 
 <p>因为我忘记重新计算hasMore标志了……其实只要协程下面这样就好了。</p>
 
-<pre><code>for offset &lt;= limit {
+<pre><code>for offset &amp;lt;= limit {
     // ...
-    var hasMore = offset &lt; matchLimit
+    var hasMore = offset &amp;lt; matchLimit
     for hasMore {
         // do someting
         offset++
-        hasMore = offset &lt; matchLimit
+        hasMore = offset &amp;lt; matchLimit
     }
     if !hasMore {
         break
@@ -187,7 +188,7 @@ while (off &lt;= limit) {
 <!--            -->
 
 <!--            -->
-<!--             <a href="/技术/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9AGoLucene%EF%BC%9F/" title="为什么要做GoLucene？">Next &rarr;</a> -->
+<!--             <a href="/技术/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9AGoLucene/" title="为什么要做GoLucene">Next &rarr;</a> -->
 <!--            -->
 <!--            -->
 <!--     </div> -->

@@ -23,6 +23,7 @@
 <link href="/assets/gor-theme-blink/stylesheets/nprogress.css" type="text/css" rel="stylesheet" media="all">
 <link href="/assets/gor-theme-blink/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
 <link href="/assets/gor-theme-blink/stylesheets/font-awesome.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/gor-theme-blink/javascripts/click.js"></script>
 <script src="/assets/gor-theme-blink/javascripts/jquery.min.js"></script>
 <script src="/assets/gor-theme-blink/javascripts/jquery.fitvids.js"></script>
 <script src="/assets/gor-theme-blink/javascripts/jquery.history.js"></script>
@@ -70,42 +71,50 @@
      <div id="post-index" class="container">
         <article class="post-container post">
     <header class="post-header">
-    <h1 class="post-title">为什么要做GoLucene？</h1>
+    <h1 class="post-title">用CSS制作简单的logo水印</h1>
     <p class="post-date">
-        <time >2014-08-22</time>
+        <time >2014-08-17</time>
     </p>
     </header>
     <div class="post-content clearfix">
-    <p>从一开始接触Java就不喜欢它，所以尽管我也算是最早一批接触Java的程序员，真正开始用也要到2009年我在一个独立项目中接触JAX-RS开始。JAX-RS极大的抽象和简化了Web开发，使得开发人员完全不需要在意Servlet的细节（尽管我也实现了一个自己的JAX-RS库，用到反射和Servlet），只需熟悉HTTP就可以开发Web应用了。到了这个时候，我才对Java有了些许的好感。后来接触了Scala和Clojure，很喜欢他们处理集合的方式，以及各种辅助的方法。可是真到了开发应用，还是需要依赖那些框架，而框架使用中的繁琐又反过来抵消了语言本身带给我的好感，遂一一弃之。</p>
+    <p>最近部门要办一个Bluemix和CloudFoundry的推广月活动，我应邀在第一周做一个讲座介绍Bluemix和CF命令行的使用。为了让讲座更炫一些，我照例又试用了一个新的slide工具<a href="http://imakewebthings.com/deck.js/">deck.js</a>。具体的ppt等我做完讲座再放出，这里要分享的是一个logo水印的制作方法。</p>
 
-<p>直到Go的出现。</p>
+<p>在公司内部做讲座，常用到的ppt首页一般都有一个大大的公司logo（用来填补首页的空白……）。为了体现我们的团队，我特地把logo换成了我们的团队名称。为了制作这个logo水印，我尝试了office的艺术字和Paint.NET(PS不懂），效果都不太好。想起来自己也算是个前台开发人员（囧），就试着用CSS做了一个，期间遇到无数的问题，一一用谷歌解决。代码如下：</p>
 
-<p>Go真的让我眼前一亮，语言本身快速上手，开发Web应用让我找回了REST的感觉，语言库很全，要什么有什么。OO的部分有些怪，不过因为之前接触过JS的原型链，对于嵌入对象指针的方式也不会非常排斥。可以说Go就是我一直要的菜。</p>
+<pre><code>.watermark {
+  font-size: 15em;
+  -webkit-transform: rotate(-30deg);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  opacity: 0.4;
+  margin-right: -5%;    
+  margin-bottom: -5%;
+}
+</code></pre>
 
-<p>回到一开始的问题，为什么要做GoLucene呢？因为我比较喜欢Linux而不是Unix，也就是一个程序包含所有功能，而不是创建各种小程序协同工作。而Web应用中搜索是一块很重要的功能，虽然我也可以用ElasticSearch的REST接口，或者干脆使用Google Site Search，但这些都显得太累赘……</p>
+<p>什么，你没看到这里的水印？请务必留言给我。</p>
 
-<p>我也许是太纠结了。</p>
-
-<p>经常会问自己，为什么要做这个？为什么要做那个？理由也是各种各样的，但也许我就是想这么做。所以如果有人问起我，为什么要花这么多时间在GoLucene上，我想说的是，我就是想这么干。</p>
+<p><div class="watermark">ACE</dev></p>
 
 
     </div>
     <footer class="post-footer clearfix">
             <!-- <p class="post-tags"><span>Tagged:</span> </p> -->
             <div class="share">
-                   <a class="icon-twitter" href="http://twitter.com/share?text=为什么要做GoLucene？&url=http://zhouyiyan.cn/技术/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9AGoLucene%EF%BC%9F/"
+                   <a class="icon-twitter" href="http://twitter.com/share?text=用CSS制作简单的logo水印&url=http://zhouyiyan.cn/技术/%E7%94%A8CSS%E5%88%B6%E4%BD%9C%E7%AE%80%E5%8D%95%E7%9A%84logo%E6%B0%B4%E5%8D%B0/"
                 onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                 <i class="fa fa-twitter"></i>
                 <span class="hidden">Twitter</span>
             </a>
 
-            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://zhouyiyan.cn/技术/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9AGoLucene%EF%BC%9F/"
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://zhouyiyan.cn/技术/%E7%94%A8CSS%E5%88%B6%E4%BD%9C%E7%AE%80%E5%8D%95%E7%9A%84logo%E6%B0%B4%E5%8D%B0/"
                 onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                 <i class="fa fa-facebook"></i>
                 <span class="hidden">Facebook</span>
             </a>
 
-            <a class="icon-google-plus" href="https://plus.google.com/share?url=http://zhouyiyan.cn/技术/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9AGoLucene%EF%BC%9F/"
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http://zhouyiyan.cn/技术/%E7%94%A8CSS%E5%88%B6%E4%BD%9C%E7%AE%80%E5%8D%95%E7%9A%84logo%E6%B0%B4%E5%8D%B0/"
                onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                <i class="fa fa-google-plus"></i>
                 <span class="hidden">Google+</span>
@@ -129,12 +138,12 @@
 
 <!-- <div class="pagination"> -->
 <!--            -->
-<!--             <a href="/技术/%E8%B6%85%E5%A4%9A%E7%9A%84Bug/" title="超多的Bug"></a> -->
+<!--             <a href="/技术/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9AGoLucene/" title="为什么要做GoLucene"></a> -->
 <!--            -->
 <!--            -->
 
 <!--            -->
-<!--             <a href="/default/%E7%94%A8CSS%E5%88%B6%E4%BD%9C%E7%AE%80%E5%8D%95%E7%9A%84logo%E6%B0%B4%E5%8D%B0/" title="用CSS制作简单的logo水印">Next &rarr;</a> -->
+<!--             <a href="/default/%E8%AF%95%E7%94%A8LedisDB/" title="试用LedisDB">Next &rarr;</a> -->
 <!--            -->
 <!--            -->
 <!--     </div> -->

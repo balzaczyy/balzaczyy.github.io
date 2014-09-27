@@ -14,6 +14,7 @@
 
   "javascripts" : {
     "default" : [
+        "click.js",
         "jquery.min.js",
         "jquery.fitvids.js",
         "jquery.history.js",
