@@ -2,7 +2,13 @@
 <rss version="2.0">  <channel>
     <title>一言</title>
     <link>http://zhouyiyan.cn</link>
-    <pubDate>07 Oct 14 11:58 CST</pubDate>
+    <pubDate>08 Oct 14 21:15 CST</pubDate>
+    <item>
+      <title>利用Travis做持续构建测试</title>
+      <link>http://zhouyiyan.cn/技术/%E5%88%A9%E7%94%A8Travis%E5%81%9A%E6%8C%81%E7%BB%AD%E6%9E%84%E5%BB%BA%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>2014-10-08 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;随着项目的规模不断增长，持续的构建测试能够有效的保障代码的质量。以前做Java的时候一直用Maven管理依赖，Jenkins自动化集成测试，Sonar监控代码质量。现在Go的项目，因为是放在Github上的关系，试用了下Travis。不得不说配置真心方便，yml几行代码就测试了Go从发布以来的四个版本（发现只支持到1.2+）。而且反应真的很灵敏，每次push代码，Travis都很勤恳的测试，有错误就发邮件通知我，搞的我现在每次push都很谨慎，生怕搞坏了build。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;另外我还把构建的状态放到了Github项目的首页，看起来很专业嘛，嘻嘻。&lt;/p&gt;&#xA;</description>
+    </item>
     <item>
       <title>寻找哈姆雷特</title>
       <link>http://zhouyiyan.cn/技术/%E5%AF%BB%E6%89%BE%E5%93%88%E5%A7%86%E9%9B%B7%E7%89%B9/</link>
@@ -1528,8 +1534,8 @@
       <description>&lt;p&gt;在163的blog上面转了一圈又回来了，感觉还是这里好。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;论文外审已经结束，工作也正在等待结果，除了这些，似乎没什么值得期待的了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;今天收到计算机应用的退修信，说是背景介绍过多，算法实现细节欠详细，还提了很多格式上的要求。虽然不是录取通知，但至少没有被立即退掉，还是有希望的。嗯，今天回去BC开始改论文咯！&lt;/p&gt;&#xA;&#xA;&lt;p&gt;目前的任务还有：修改论文、大论文、工作、NomadPIM解读和一些英语Training。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;论文已经送出去了，开始认真写PPT，都说PPT是世界上第一大开发工具了！&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>Go or No Go?</title>
-      <link>http://zhouyiyan.cn/博客/Go-or-No-Go%3F/</link>
+      <title>Go or No Go</title>
+      <link>http://zhouyiyan.cn/博客/Go-or-No-Go/</link>
       <pubDate>2006-09-26 12:00:00 +0800</pubDate>
       <description>&lt;p&gt;无论是论文和工作，都到了Go or No Go的时候了。不过现在已经不是自己能够控制的了，只希望结果早点出来。感冒还是老样子，又有两个人被BC传染了，实在对不起亚！而今天唯一高兴的是给自己的小W买了硅胶套和屏幕保护贴，花了80元，BC现在还心疼呢……不过想到能长久看到小W清清爽爽的样子，这点开销还是值得的。&lt;/p&gt;&#xA;</description>
     </item>
