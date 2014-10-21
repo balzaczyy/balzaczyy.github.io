@@ -61,34 +61,43 @@
      <div id="post-index" class="container">
         <article class="post-container post">
     <header class="post-header">
-    <h1 class="post-title">尝试用Pure来设计博客新主题</h1>
+    <h1 class="post-title">减少前台代码单元测试的尝试</h1>
     <p class="post-date">
-        <time >2014-10-19</time>
+        <time >2014-10-21</time>
     </p>
     </header>
     <div class="post-content clearfix">
-    <p>Pure是一款Yahoo的CSS框架，很轻量，支持响应式设计，而且默认的主题配色很清新。虽然YUI已经不在了，但是这个框架却给我留下了深刻的印象。今天，我尝试着对比自己博客的主题，用<a href="http://purecss.io/layouts/blog/">Pure给出的博客样式</a>来重新设计。原先的主题是仿照blink设计的，移动优先，红色加黑色配合粗体字很有档次，惹眼的进度条以及前进后退中的淡入淡出效果，几乎没有什么缺点。Pure的博客样式则稍欠个性，中规中矩的布局，深蓝灰的背景，如果博客内容片图片的话到还是可以得，宽屏幕的适配是主要的优点。</p>
+    <p>从后台转到前台开发后，经常困扰我的就是单元测试了。前台真的很难做单元测试，一方面没有很好的工具，另一方面需求的变化让维护单元测试成为一种负担。而且，在修复问题的时候，单元测试也没有做到保护和易于运行。对于后台来说，运行整个系统是很困难的，所以单元测试成了小规模验证变更的最佳工具。而到了前台，运行系统的界面反倒是相对容易的，而且设计的改良，使得任何操作的重现步骤都不会特别复杂。</p>
 
-<p>最终我还是没有采用新的主题，因为……实在是不好看。我还是喜欢现在简洁的样子，虽然没有利用到宽屏幕的优势，不过平时手机看看还是很方便的。也许会在明天开始的编程大赛里用用吧。</p>
+<p>单元测试对于前台开发还是必要的，但是如何控制投入产出比呢？</p>
+
+<ul>
+<li>首先服务层是不用单元测试的，这个后台开发人员应该已经测试过。</li>
+<li>界面的特性开发也可以不用单元测试，毕竟过几天说不定这个特性就已经不在了。</li>
+<li>重复的功能缺陷可以用简单的单元测试，避免再次反复。</li>
+<li>浏览器兼容性问题最好抽成自己的框架，避免重复犯错。</li>
+</ul>
+
+<p>这样下来要写的单元测试就少很多了。不过如果单元测试完全不要写就好了，毕竟学习相应的测试工具也要花时间的。有什么更好的方法么？</p>
 
 
     </div>
     <footer class="post-footer clearfix">
             <!-- <p class="post-tags"><span>Tagged:</span> </p> -->
             <div class="share">
-                   <a class="icon-twitter" href="http://twitter.com/share?text=尝试用Pure来设计博客新主题&url=http://zhouyiyan.cn/博客/%E5%B0%9D%E8%AF%95%E7%94%A8Pure%E6%9D%A5%E8%AE%BE%E8%AE%A1%E5%8D%9A%E5%AE%A2%E6%96%B0%E4%B8%BB%E9%A2%98/"
+                   <a class="icon-twitter" href="http://twitter.com/share?text=减少前台代码单元测试的尝试&url=http://zhouyiyan.cn/想法/%E5%87%8F%E5%B0%91%E5%89%8D%E5%8F%B0%E4%BB%A3%E7%A0%81%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E5%B0%9D%E8%AF%95/"
                 onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                 <i class="fa fa-twitter"></i>
                 <span class="hidden">Twitter</span>
             </a>
 
-            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://zhouyiyan.cn/博客/%E5%B0%9D%E8%AF%95%E7%94%A8Pure%E6%9D%A5%E8%AE%BE%E8%AE%A1%E5%8D%9A%E5%AE%A2%E6%96%B0%E4%B8%BB%E9%A2%98/"
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://zhouyiyan.cn/想法/%E5%87%8F%E5%B0%91%E5%89%8D%E5%8F%B0%E4%BB%A3%E7%A0%81%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E5%B0%9D%E8%AF%95/"
                 onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                 <i class="fa fa-facebook"></i>
                 <span class="hidden">Facebook</span>
             </a>
 
-            <a class="icon-google-plus" href="https://plus.google.com/share?url=http://zhouyiyan.cn/博客/%E5%B0%9D%E8%AF%95%E7%94%A8Pure%E6%9D%A5%E8%AE%BE%E8%AE%A1%E5%8D%9A%E5%AE%A2%E6%96%B0%E4%B8%BB%E9%A2%98/"
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http://zhouyiyan.cn/想法/%E5%87%8F%E5%B0%91%E5%89%8D%E5%8F%B0%E4%BB%A3%E7%A0%81%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E5%B0%9D%E8%AF%95/"
                onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                <i class="fa fa-google-plus"></i>
                 <span class="hidden">Google+</span>
@@ -112,12 +121,12 @@
 
 <!-- <div class="pagination"> -->
 <!--            -->
-<!--             <a href="/想法/%E5%87%8F%E5%B0%91%E5%89%8D%E5%8F%B0%E4%BB%A3%E7%A0%81%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E5%B0%9D%E8%AF%95/" title="减少前台代码单元测试的尝试"></a> -->
 <!--            -->
+<!--             <1!-- <a>&larr; Previous</a></li> --1> -->
 <!--            -->
 
 <!--            -->
-<!--             <a href="/技术/%E5%88%A9%E7%94%A8Coveralls%E6%94%B6%E9%9B%86%E6%B5%8B%E8%AF%95%E8%A6%86%E7%9B%96%E7%8E%87/" title="利用Coveralls收集测试覆盖率">Next &rarr;</a> -->
+<!--             <a href="/博客/%E5%B0%9D%E8%AF%95%E7%94%A8Pure%E6%9D%A5%E8%AE%BE%E8%AE%A1%E5%8D%9A%E5%AE%A2%E6%96%B0%E4%B8%BB%E9%A2%98/" title="尝试用Pure来设计博客新主题">Next &rarr;</a> -->
 <!--            -->
 <!--            -->
 <!--     </div> -->
