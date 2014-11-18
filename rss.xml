@@ -2,7 +2,13 @@
 <rss version="2.0">  <channel>
     <title>一言</title>
     <link>http://zhouyiyan.cn</link>
-    <pubDate>21 Oct 14 20:45 CST</pubDate>
+    <pubDate>18 Nov 14 22:12 CST</pubDate>
+    <item>
+      <title>监视AngularJS的select控件</title>
+      <link>http://zhouyiyan.cn/技术/%E7%9B%91%E8%A7%86AngularJS%E7%9A%84select%E6%8E%A7%E4%BB%B6/</link>
+      <pubDate>2014-11-18 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;今天遇到了一个棘手的问题，AngularJS的select控件不响应watch方法。HTML代码如下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;select ng-model=&amp;quot;currentInstance&amp;quot; ng-options=&amp;quot;opt for opt in opts&amp;quot;&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;JS代码如下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;$scope.$watch(&#39;currentInstance&#39;, function(currentInstance) {&#xA;    // do something&#xA;});&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;调试了很多时间，watch的方法除了初始化的时候调用两次之外，再也没被调用过。前几次谷歌都没有得到很好的解法，最后尝试了一个组合，得到了&lt;a href=&#34;http://stackoverflow.com/questions/17536751/angularjs-updating-ngmodel-property-when-select-options-change&#34;&gt;这个答案&lt;/a&gt;，顺利解决问题。基本解法是把currentInstance替换成一个对象的字段，HTML代码如下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;&amp;lt;select ng-model=&amp;quot;choice.selectedId&amp;quot; ng-options=&amp;quot;opt for opt in opts&amp;quot;&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;JS代码如下&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;$scope.choice = {};&#xA;$scope.$watch(&#39;choice.selectedId&#39;, function(currentInstance) {&#xA;    // do something&#xA;});&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;不过这个答案并没有说明原因，官方文档表示ng-model是按引用比较，我尝试了字符串，发现也没有办法触发watch。在该问题的另一个答案中，提到在AngularJS里面，scope不应该作为模型的根，而是应该创建单独的对象，我估计这很可能和这个问题真正的root cause有关，不过也无从验证了。&lt;/p&gt;&#xA;</description>
+    </item>
     <item>
       <title>减少前台代码单元测试的尝试</title>
       <link>http://zhouyiyan.cn/想法/%E5%87%8F%E5%B0%91%E5%89%8D%E5%8F%B0%E4%BB%A3%E7%A0%81%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E5%B0%9D%E8%AF%95/</link>
