@@ -2,7 +2,13 @@
 <rss version="2.0">  <channel>
     <title>一言</title>
     <link>http://zhouyiyan.cn</link>
-    <pubDate>12 Dec 14 23:09 CST</pubDate>
+    <pubDate>24 Dec 14 22:37 CST</pubDate>
+    <item>
+      <title>哈姆雷特迁回阿里云</title>
+      <link>http://zhouyiyan.cn/博客/%E5%93%88%E5%A7%86%E9%9B%B7%E7%89%B9%E8%BF%81%E5%9B%9E%E9%98%BF%E9%87%8C%E4%BA%91/</link>
+      <pubDate>2014-12-24 12:00:00 +0800</pubDate>
+      <description>&lt;p&gt;因为日志不稳定容易丢失的原因，我最终还是选择把应用从Bluemix迁回了阿里云，新的Hamlet应用可以从[hamlet.zhouyiyan.cn]()这个地址访问。原来的[hamlet.mybluemix.net]()暂时还可以用（这个域名也算是我抢注的），不过更新是不会有了的。同时，我把博客的地址也改到了[blog.zhouyiyan.cn]()，现在[zhouyiyan.cn]()下的地址会自动转移到新的子域名下面，希望不要对我的搜索结果有影响。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;为了体现程序员的逼格，新域名的转移，以及子域名的映射，我都用Go做了实现。其实倒也不难，Go标准库里已经有反向代理可以用，子域名采用了Github Pages那样，映射到单一ip地址，然后通过HTTP的host头来判断就好了。全部代码算上空行也只有36行，比我自己配置nginx要方便得多。也许将来得了空，我会再加上配置文件的支持，那样的话和nginx的效果就差不多了。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;附心情：最近心情很忐忑，一直在等。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;另附：我最近买了很多东西。&lt;/p&gt;&#xA;</description>
+    </item>
     <item>
       <title>我需要一个日志和微博工具</title>
       <link>http://zhouyiyan.cn/技术/%E6%88%91%E9%9C%80%E8%A6%81%E4%B8%80%E4%B8%AA%E6%97%A5%E5%BF%97%E5%92%8C%E5%BE%AE%E5%8D%9A%E5%B7%A5%E5%85%B7/</link>
@@ -1618,8 +1624,8 @@
       <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;You Are Austin&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;A little bit country, a little bit rock and roll.&#xA;You&amp;rsquo;re totally weird and very proud of it.&#xA;Artistic and freaky, you still seem to fit in&amp;hellip; in your own strange way.&#xA;Famous Austin residents: Lance Armstrong, Sandra Bullock, Andy Roddick&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;http://www.blogthings.com/whatamericancityareyouquiz/&#34;&gt;What American City Are You?&lt;/a&gt;&lt;/p&gt;&#xA;</description>
     </item>
     <item>
-      <title>又生病了</title>
-      <link>http://zhouyiyan.cn/生活/%E5%8F%88%E7%94%9F%E7%97%85%E4%BA%86/</link>
+      <title>生病了</title>
+      <link>http://zhouyiyan.cn/生活/%E7%94%9F%E7%97%85%E4%BA%86/</link>
       <pubDate>2006-03-03 12:00:00 +0800</pubDate>
       <description>&lt;p&gt;“今天最高15度”天气预报如是说着，BC便把羽绒服换下。都说春天要捂，可是BC怎么会这么不小心呢？这不，脑浆晃了一整天了……&lt;/p&gt;&#xA;</description>
     </item>
