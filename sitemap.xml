@@ -4,6 +4,11 @@
 		<loc>http://blog.zhouyiyan.cn/</loc>
 	</url>
 	<url>
+		<loc>http://blog.zhouyiyan.cn/生活/%E4%BA%94%E7%82%B9%E5%8D%8A%E7%9A%84%E6%97%A9%E6%99%A8/</loc>
+		<lastmod>2015-11-19</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
 		<loc>http://blog.zhouyiyan.cn/技术/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAPaaS%E3%80%81%E5%A4%96%E8%A1%8C%E4%BA%BA%E5%92%8CKubernates/</loc>
 		<lastmod>2015-10-25</lastmod>
 		<changefreq>weekly</changefreq>
