@@ -6,11 +6,11 @@
         <title>
             
             
-                一言
+                博客引擎换成Hugo | 一言
             
         </title>
 
-        <meta name="title" content="一言">
+        <meta name="title" content="博客引擎换成Hugo | 一言">
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -28,7 +28,7 @@
         <meta name="twitter:site" content="@balzaczyy">
         <meta name="twitter:creator" content="@balzaczyy">
         
-        <meta property="og:title" content="一言">
+        <meta property="og:title" content="博客引擎换成Hugo | 一言">
         <meta property="og:type" content="website">
         <meta property="og:url" content="http://blog.zhouyiyan.cn/">
         <meta property="og:image" content="http://blog.zhouyiyan.cn//images/osprey.png">
@@ -55,8 +55,8 @@
         <meta name="theme-color" content="#FFF">
         
 
-        <link rel="canonical" href="http://blog.zhouyiyan.cn/">
-        <link href="http://blog.zhouyiyan.cn/index.xml" rel="alternate" type="application/rss+xml" title="一言">
+        <link rel="canonical" href="http://blog.zhouyiyan.cn/blog/move-to-hugo/">
+        
         <link rel="stylesheet" href="http://blog.zhouyiyan.cn//styles/main.css" type="text/css">
         
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/github.min.css">
@@ -76,17 +76,6 @@ ga('send', 'pageview');
     <body>
         
 
-        
-        <header class="row middle-xs center-xs">
-            <div class="col-xs-12">
-                <div class="row middle-xs center-xs">
-                    <div class="col-xs-12"><img src="http://blog.zhouyiyan.cn/images/osprey-logo.png" alt="一言"></div>
-                </div>
-                <div class="row middle-xs center-xs">
-                    <div class="col-xs-12"><h1>Under Construction<span class="cursor">|</span></h1></div>
-                </div>
-            </div>
-        </header>
         
 
         <nav class="row middle-xs center-xs">
@@ -124,114 +113,53 @@ ga('send', 'pageview');
         <main>
 
 
+    <section class="container">
+        <section class="content">
+            <h1> 博客引擎换成Hugo </h1>
 
+            <div class="sub-header">
+                August 2017 · 1 minute read
+            </div>
 
-<section class="about" id="about">
-    <div class="container middle-xs">
-        <div class="row center-xs">
-            <div class="col-xs-12"><h1>About</h1></div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 middle-xs">
+            <div class="entry-content">
+                <p>两年没有更了，自从进了亿贝，775的Hard模式搞得我没有时间再拾掇自己的网站。（好吧，也许我只是懒……）这次重更也几乎是机缘巧合。我以前是做文档中心成长起来，后来博客用了Gor转静态Markdown到HTML。所以上个月接到一个做文档中心任务的时候，我很自然的把市面上静态网站生成器都研究了一把，最后聚焦到Hugo和Docsify。</p>
+
+<p>Hugo类似Gor，用Go语言做模板引擎静态转换Markdown并配合主题生成前端资源，速度快，社区主题非常多，而且制作程度都很精良，对前段没有任何限制。Docsify则走了一条完全不同的道路，利用JS动态渲染Markdown，也提供了常用插件，但是主题仅限CSS，并没有很多扩展性，也很少。</p>
+
+<p>因为Docsify的主题都不够大气和专业，而且有些Vuejs粉的感觉，所以作为Reactjs的铁杆迷弟，果断弃之。最终也没有使用Hugo，尽管使用了看起来非常专业的docdock主题，项目经理看了也没有反对，但是作为产品的一部分，和现有产品还是有些违和感，所以挣扎了半天，用Docsify的方案写了一个。</p>
+
+<p>没有在工作上用到Hugo实在是个缺憾，所以我决定把我的博客给迁移到Hugo上，一不浪费，二也算是践行我一贯的折腾风格。整个迁移过程非常顺利，因为个人气质的关系（装X），我选择了极简风格的Osprey，所有文章只要拷贝一下就好了。同样因为极简风格，没有分类，没有标签，只有时间顺序，也省得我费时间整理那些数据。</p>
+
+<p>接下来还有两件事，把我的Logo重新设计一下，暂时就丢了Osprey在上面。另外把我过去的一些项目再整理整理，拿出来展示一下。</p>
+
+            </div>
+
+            <div class="pagination">
                 
-                    <p>我目前和家人住在上海，这里也许空气质量一般，交通状况较差，但不缺便利店、好喝的咖啡和DQ，所以我喜欢住在这里。也许未来会去更远的地方走走，但还不确定。</p>
-
-<p>我喜欢读书，最喜欢向人推荐摩托车修车艺术，叔本华的幸福论也很喜欢，尤其喜欢被改编成电影的小说，指环王、饥饿游戏等等。</p>
-
+                    <a href="http://blog.zhouyiyan.cn/blog/five-in-the-morning/">&laquo; 五点半的早晨</a>
+                
                 
             </div>
-        </div>
-    </div>
-</section>
-
-
-<section class="gallery" id="work">
-    <div class="row">
-
-        
-        
-
-        
-        
-
-        
-        
+        </section>
+        <br>
+        <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        (function() {
             
-        
-
-    </div>
+            
+            if (window.location.hostname == "localhost")
+                return;
+            var disqus_shortname = 'zhouyiyan';
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view comments powered by <a href="http://disqus.com/?ref_noscript">Disqus</a>.</noscript>
 </section>
 
-<section class="blog" id="blog">
-    <div class="container">
-        <div class="row center-xs">
-            <div class="col-xs-12"><h1>Latest Posts</h1></div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 posts-list">
-                
-                    <article>
-                        <h2><a href="http://blog.zhouyiyan.cn/blog/move-to-hugo/">博客引擎换成Hugo</a></h2>
-                        <div class=sub-header>
-                          August 2017 · 1 minute read
-                        </div>
-                    </article>
-                
-                    <article>
-                        <h2><a href="http://blog.zhouyiyan.cn/blog/five-in-the-morning/">五点半的早晨</a></h2>
-                        <div class=sub-header>
-                          November 2015 · 1 minute read
-                        </div>
-                    </article>
-                
-                    <article>
-                        <h2><a href="http://blog.zhouyiyan.cn/blog/2015-10-25-mini-paas-and-outsider-opinion/">我的第一个PaaS、外行人和Kubernates</a></h2>
-                        <div class=sub-header>
-                          October 2015 · 1 minute read
-                        </div>
-                    </article>
-                
-                    <article>
-                        <h2><a href="http://blog.zhouyiyan.cn/blog/2015-10-14-lazy-is-virtue/">懒是一种美德</a></h2>
-                        <div class=sub-header>
-                          October 2015 · 1 minute read
-                        </div>
-                    </article>
-                
-                    <article>
-                        <h2><a href="http://blog.zhouyiyan.cn/blog/2015-05-14-todos-limitation/">TODO的弊端</a></h2>
-                        <div class=sub-header>
-                          May 2015 · 1 minute read
-                        </div>
-                    </article>
-                
-            </div>
-        </div>
-        <div class="row center-xs">
-            <div class="col-xs-12"><h3><a href="http://blog.zhouyiyan.cn//blog/">View All</a></h3></div>
-        </div>
-    </div>
-</section>
-
-<section class="contact" id="contact">
-    <div class="container">
-        <div class="row center-xs">
-            <div class="col-xs-12"><h1>Let's Chat</h1></div>
-        </div>
-        <form id="form-contact" action="https://formspree.io/balzaczyy@gmail.com" method="POST">
-            <div class="row center-xs">
-                <div class="col-xs-12 col-sm-6"><input type="text" name="name" placeholder="Name" required></div>
-                <div class="col-xs-12 col-sm-6"><input type="email" name="email" placeholder="Email" required></div>
-                <div class="col-xs-12"><input type="text" name="_subject" placeholder="Subject" required></div>
-                <div class="col-xs-12"><textarea name="message" placeholder="Message" required></textarea></div>
-                <input type="text" name="_gotcha" style="display:none">
-                <input type="hidden" name="_next" value="/">
-                <div class="col-xs-6" id="form-submit"><input type="submit" value="Send"></div>
-                <div class="col-xs-12" id="form-thankyou" style="display:none;">Thanks for your email!</div>
-            </div>
-        </form>
-    </div>
-</section>
+    </section>
 
         </main>
         <footer class="row middle-xs center-xs">
@@ -257,49 +185,7 @@ ga('send', 'pageview');
             
             <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
             
-            <script src="http://blog.zhouyiyan.cn/scripts/index.js" type="text/javascript"></script>
-            
-            
-            <script>
-              $("#form-contact").on("submit", function(e) {
-                  e.preventDefault();
-
-                  
-                  var name = $("input[name=name]").val();
-                  var email = $("input[name=email").val();
-                  var subject = $("input[name=_subject").val();
-                  var message = $("textarea[name=message]").val();
-
-                  
-                  $.ajax({
-                      url:"https://formspree.io/balzaczyy@gmail.com",
-                      method:"POST",
-                      data:{
-                          name:name,
-                          _replyto:email,
-                          email:email,
-                          _subject:subject,
-                          message:message,
-                      },
-                      dataType:"json",
-                      success:function() {
-                          console.log("Form successfully sent");
-                          
-                          $("#form-contact").get(0).reset();
-                          
-                          $("#form-submit").fadeOut(function(){
-                              $("#form-thankyou").fadeIn(function(){
-                                  $("#form-thankyou").delay(4000).fadeOut(function(){
-                                      $("#form-submit").fadeIn();
-                                  });
-                              });
-                          });
-                      }
-                  });
-
-              });
-            </script>
-            
+            <script src="http://blog.zhouyiyan.cn/scripts/main.js" type="text/javascript"></script>
             
             <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
         </footer>
